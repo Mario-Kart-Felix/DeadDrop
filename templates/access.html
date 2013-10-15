@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <title>Dead Drop Access Panel</title>
+</head>
+<body>
+    <h1>Welcome, agent!</h1>
+    <form method="POST">
+        Enter the URL for your face scan:
+        <input type="text" name="url"
+               value="{% if form %}{{form['url']}}{% endif %}" />
+        <input type="submit" value="Submit" />
+    <form>
+    <br/><br/>
+    {% if profile %}
+        We were able to discern the following features:
+        <ul>
+            <li>Gender: {{ profile.gender or "unknown" }}</li>
+            <li>Glasses: {{ profile.glasses or "unknown" }}</li>
+            <li>Smile: {{ profile.smile or "unknown" }}</li>
+            <li>Lips: {{ profile.lips or "unknown" }}</li>
+            <li>Eyes: {{ profile.eyes or "unknown" }}</li>
+            <li>Mood: {{ profile.mood or "unknown" }}</li>
+        </ul>
+    {% endif %}
+    {% if message %} <h3 style="color:red">{{message}}</h3> {% endif %}
+    <br/><br/>
+    {% if profile %} <img src="{{form['url']}}" /> {% endif %}
+</body>   
+</html>
